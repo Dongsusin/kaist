@@ -70,6 +70,10 @@ header {
     line-height: 150%;
     text-align: center;
     text-wrap: nowrap;
+    transition: all 1s;
+  }
+  .menu ul li a span:hover {
+    color: #2555ff;
   }
   .launge {
     display: flex;
@@ -90,6 +94,11 @@ header {
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
+    cursor: pointer;
+    transition: all 1s;
+  }
+  .launge button span:hover {
+    color: #2555ff;
   }
 }
 /*main*/
@@ -168,14 +177,21 @@ main {
     justify-content: center;
     gap: 36px;
     border: 2px solid #616161;
+    transition: all 1s;
+  }
+  .more a:hover {
+    border: 2px solid #fff;
+  }
+  .more a:hover span {
+    color: #fff;
   }
   .more a span {
-    color: #fff;
+    transition: all 1s;
+    color: #616161;
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
     font-style: normal;
-    opacity: 0.5;
   }
   .content {
     word-spacing: 2px;
