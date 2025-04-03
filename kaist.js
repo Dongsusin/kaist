@@ -1,7 +1,8 @@
-const wrap = document.getElementsByClassName("wrap")[0]; // 보일 영역
+//원페이지 스크롤
+const wrap = document.getElementsByClassName("wrap")[0];
 const container = document.getElementsByClassName("container");
-let page = 0; // 영역 포지션 초기값
-const lastPage = container.length - 2; // 마지막 페이지
+let page = 0;
+const lastPage = container.length - 2;
 window.addEventListener(
   "wheel",
   (e) => {
@@ -20,10 +21,9 @@ window.addEventListener(
     wrap.style.top = page * -100 + "vh";
   },
   { passive: false }
-); // 디폴트 기능 제거 - 스크롤
-
+);
+//텍스트 애니메이션
 const articles = document.querySelectorAll(".content");
-
 const articleObserver = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
@@ -36,40 +36,31 @@ const articleObserver = new IntersectionObserver(
   },
   { threshold: 0.3 }
 );
-
 articles.forEach((article) => {
   articleObserver.observe(article);
 });
 //포토폴리오 팝업
-
-// 쿠키 가져오기
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   return parts.length === 2 ? parts.pop().split(";").shift() : null;
 }
-// 쿠키 설정하기
 function setCookie(name, value, days) {
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
 }
-// 쿠키 삭제하기 (테스트용)
 function deleteCookie(name) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
-// 테스트용: 브라우저 콘솔에서 deletePopupCookie() 호출로 쿠키 삭제 가능
 window.deletePopupCookie = () => deleteCookie("hidePopup");
-// 페이지 로드 완료 후 실행
 document.addEventListener("DOMContentLoaded", function () {
-  // 이미 오늘 다시 보지 않기 설정이 되어 있다면 팝업을 띄우지 않음
   if (getCookie("hidePopup") !== "true") {
     const overlay = document.createElement("div");
     overlay.style = `
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-color: rgba(0, 0, 0, 0.5); z-index: 999;
         `;
-
     const popup = document.createElement("div");
     popup.style = `
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -89,18 +80,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 오늘 다시 보지 않기
             </label>
         `;
-
     const closeButton = popup.querySelector("button");
     const noShowToday = popup.querySelector("#noShowToday");
-
     closeButton.addEventListener("click", () => {
       if (noShowToday.checked) {
-        setCookie("hidePopup", "true", 1); // 하루 동안 유지
+        setCookie("hidePopup", "true", 1);
       }
       overlay.remove();
       popup.remove();
     });
-
     document.body.append(overlay, popup);
   }
 });
