@@ -22,3 +22,22 @@ window.addEventListener(
   },
   { passive: false }
 ); // 디폴트 기능 제거 - 스크롤
+
+const articles = document.querySelectorAll(".content");
+
+const articleObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+articles.forEach((article) => {
+  articleObserver.observe(article);
+});

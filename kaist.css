@@ -135,6 +135,7 @@ main .title strong {
   flex-direction: column;
   overflow: hidden;
   gap: 8px;
+  width: 75%;
 }
 main .title strong span {
   display: flex;
@@ -228,6 +229,9 @@ main .container:nth-child(5) {
 }
 /*반응형*/
 @media screen and (max-width: 1024px) {
+  main .title strong {
+    width: 100%;
+  }
   header .container,
   main .layout {
     max-width: 992px;
@@ -323,5 +327,41 @@ main .container:nth-child(5) {
     .title strong span:nth-child(1) {
       font-size: 15px;
     }
+  }
+}
+/*텍스트 등장*/
+.content {
+  word-spacing: 2px;
+  overflow: hidden;
+}
+.letter {
+  transform: translateY(100%);
+}
+.content.show .letter {
+  animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+.appeared {
+  opacity: 0;
+}
+.content.show .appeared {
+  display: inline-block;
+  animation: appeared 1.5s both;
+}
+@keyframes reveal {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes appeared {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
